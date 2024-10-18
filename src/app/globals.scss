@@ -1,6 +1,6 @@
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #bdbdbda6;
+  --foreground: #585858a4;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +17,7 @@ body {
 }
 
 body {
-  background-image: radial-gradient(circle, #29292927, #c7c7c7a4);
+  background-image: radial-gradient(circle, var(--background), var(--foreground));
   max-height: 100svh;
 }
 
