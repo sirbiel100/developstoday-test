@@ -5,6 +5,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { BarChart } from '@mui/x-charts/BarChart';
 import style from './countryinfo.module.scss'
+interface CountryNameAndFlag {
+    data: any
+    name: string;
+    flag: string;
+}
+
+interface Border {
+    name: string;
+    code: string;
+}
+
+interface Population {
+    count: number;
+}
 
 export default function CountryPage() {
     const countryAPI = process.env.NEXT_PUBLIC_COUNTRY_NAME_AND_FLAG
@@ -13,9 +27,9 @@ export default function CountryPage() {
     const searchParams = useSearchParams()
     const iso2 = searchParams.get('iso2')
     const iso3 = searchParams.get('iso3')
-    const [countryNameAndFlag, setCountryNameAndFlag] = useState<any>()
-    const [bordersOfCountry, setBordersOfCountry] = useState<any>()
-    const [countryPopulation, setCountryPopulation] = useState<any>()
+    const [countryNameAndFlag, setCountryNameAndFlag] = useState<CountryNameAndFlag | null>(null)
+    const [bordersOfCountry, setBordersOfCountry] = useState<Border[] | null>(null)
+    const [countryPopulation, setCountryPopulation] = useState<Population | null>(null)
     const [countryError, setCountryError] = useState<boolean>()
     const [borderError, setBorderError] = useState<boolean>()
 
