@@ -17,11 +17,8 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: radial-gradient(circle, #29292927, #c7c7c7a4);
+  max-height: 100svh;
 }
 
 * {
