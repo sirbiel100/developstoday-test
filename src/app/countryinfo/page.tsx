@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BarChart } from '@mui/x-charts/BarChart';
+import { Suspense } from 'react'
 import style from './countryinfo.module.scss'
 interface CountryNameAndFlag {
     data: any
@@ -23,7 +24,7 @@ interface Population {
 export default function CountryPage() {
     const countryAPI = process.env.NEXT_PUBLIC_COUNTRY_NAME_AND_FLAG
     const borderAPI = process.env.NEXT_PUBLIC_COUNTRY_BORDER
-    const populationAPI =  process.env.NEXT_PUBLIC_COUNTRY_POPULATION
+    const populationAPI = process.env.NEXT_PUBLIC_COUNTRY_POPULATION
     const searchParams = useSearchParams()
     const iso2 = searchParams.get('iso2')
     const iso3 = searchParams.get('iso3')
@@ -130,35 +131,37 @@ export default function CountryPage() {
 
 
     return (
-        <section className={style.infoPage}>
-            <div>
-                <h2>{countryNameAndFlag?.name}</h2>
-                <Image
-                    src={countryNameAndFlag?.flag}
-                    alt={countryNameAndFlag?.data?.name || "Country Flag"}
-                    width={100}
-                    height={100}
+        <Suspense fallback={<div>Loading...</div>}>
+            <section className={style.infoPage}>
+                <div>
+                    <h2>{countryNameAndFlag?.name}</h2>
+                    <Image
+                        src={countryNameAndFlag?.flag}
+                        alt={countryNameAndFlag?.data?.name || "Country Flag"}
+                        width={100}
+                        height={100}
+                    />
+
+                </div>
+                <ul>
+                    <h3>Borders:</h3>
+                    {bordersOfCountry?.map((border: any) => (
+                        <Link href={`/countryinfo?iso2=${border.countryCode}`}>
+                            <li key={border.countryCode}>
+                                {border.commonName}
+                            </li>
+                        </Link>
+                    ))}
+                </ul>
+
+                <BarChart
+                    xAxis={[{ scaleType: 'band', data: xAxisData, dataKey: 'year' }]}
+                    series={[{ data: seriesData }]}
+                    width={500}
+                    height={300}
                 />
 
-            </div>
-            <ul>
-                <h3>Borders:</h3>
-                {bordersOfCountry?.map((border: any) => (
-                    <Link href={`/countryinfo?iso2=${border.countryCode}`}>
-                        <li key={border.countryCode}>
-                            {border.commonName}
-                        </li>
-                    </Link>
-                ))}
-            </ul>
-
-            <BarChart
-                xAxis={[{ scaleType: 'band', data: xAxisData, dataKey: 'year' }]}
-                series={[{ data: seriesData }]}
-                width={500}
-                height={300}
-            />
-
-        </section>
+            </section>
+        </Suspense>
     );
 }
