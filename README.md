@@ -40,8 +40,8 @@ Ensure you have the following installed on your machine:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your-repo/country-info-app.git
-    cd country-info-app
+    git clone https://github.com/your-repo/developstoday-test.git
+    cd developstoday-test
     ```
 
 2. Install the required dependencies:
