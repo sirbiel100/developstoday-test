@@ -7,6 +7,9 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import style from './countryinfo.module.scss'
 
 export default function CountryPage() {
+    const countryAPI = process.env.NEXT_PUBLIC_COUNTRY_NAME_AND_FLAG
+    const borderAPI = process.env.NEXT_PUBLIC_COUNTRY_BORDER
+    const populationAPI =  process.env.NEXT_PUBLIC_COUNTRY_POPULATION
     const searchParams = useSearchParams()
     const iso2 = searchParams.get('iso2')
     const iso3 = searchParams.get('iso3')
@@ -21,7 +24,7 @@ export default function CountryPage() {
     useEffect(() => {
         const fetchCountryNameAndFlag = async () => {
             try {
-                const data = await fetch('https://countriesnow.space/api/v0.1/countries/flag/images', {
+                const data = await fetch(`${countryAPI}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,7 +55,7 @@ export default function CountryPage() {
     useEffect(() => {
         const fetchBordersOfCountry = async () => {
             try {
-                const data = await fetch(`https://date.nager.at/api/v3/CountryInfo/${iso2}`)
+                const data = await fetch(`${borderAPI}/${iso2}`)
                 if (data.ok) {
                     const response = await data.json()
                     setBordersOfCountry(response.borders)
@@ -74,7 +77,7 @@ export default function CountryPage() {
     useEffect(() => {
         const fetchCountryPopulation = async () => {
             try {
-                const response = await fetch(`https://countriesnow.space/api/v0.1/countries/population`, {
+                const response = await fetch(`${populationAPI}`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
