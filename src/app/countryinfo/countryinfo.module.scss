@@ -30,12 +30,12 @@
             text-align: center;
             border-radius: 1em;
             padding: 1em;
-            background-color: var(--background);
+            background-color: #fff;
             box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.1);
             transition: all 200ms ease;
             &:hover{
-                background-color: var(--foreground);
-                color: var(--background);
+                background-color: #000;
+                color: #fff;
             }
         }
     }
