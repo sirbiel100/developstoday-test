@@ -1,18 +1,21 @@
 :root {
-  --background: #bdbdbda6;
-  --foreground: #585858a4;
+  --background: #c0c0c0;
+  --foreground: #a7a7a7a4;
+  --color: #1d1d1d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #2e2e2e9d;
-    --foreground: #ededed9f;
+    --background: #6e6e6e9d;
+    --foreground: #9191919f;
+    --color: #f0f0f0;
   }
 }
 
 html,
 body {
   max-width: 100vw;
+
   overflow-x: hidden;
 }
 
